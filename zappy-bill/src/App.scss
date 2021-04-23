@@ -1,0 +1,55 @@
+$maincolor: #f8943a;
+$secondarycolor: #1bbc9c;
+$borderColor: #ccc;
+$darkgrey: #3e3e3e;
+$darkblue: #131923;
+
+.App {
+  text-align: center;
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  .App-header {
+    background-color: $darkblue;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .App-link {
+    color: $maincolor;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.info {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: $maincolor;
+  othercolor: $secondarycolor;
+  thirdcolor: $darkblue;
+  darkgrey: $darkgrey;
+  border: solid 1px, $borderColor;
+  border-radius: 5px;
+}
