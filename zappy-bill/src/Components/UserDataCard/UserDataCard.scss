@@ -29,12 +29,15 @@ button {
     outline: none;
     transform: translateY(-1px);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-    transition: all 0.2s;
+    transition: all s;
+  }
+  &::before {
+    transition: all 3s;
   }
   &::after {
     transform: scaleX(1.4) scaleY(1.6);
     opacity: 0;
-    transition: all 0.2s;
+    transition: all 3s;
   }
   .card {
     display: flex;
@@ -55,6 +58,29 @@ button {
   }
 }
 
-// animations
+.cards {
+  overflow: hidden;
+}
 
+.card {
+  box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+  align-items: center;
+  font-size: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Flex Children */
+.card > * {
+  margin: 0;
+  transition: transform 0.5s;
+}
+
+.card.open {
+  font-size: 40px;
+}
+
+// animations
 // grow

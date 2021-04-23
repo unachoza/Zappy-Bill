@@ -1,11 +1,11 @@
 export const FORM_DATA = [
   {
-    formInput: 'text',
+    formInput: 'dropdown',
     title: 'Your Current Rate',
     icon: 'https://res.cloudinary.com/dh41vh9dx/image/upload/v1619192056/cashIcon.png',
   },
   {
-    formInput: 'text',
+    formInput: 'number',
     title: 'Miles Driven',
     icon: 'https://res.cloudinary.com/dh41vh9dx/image/upload/v1619192055/carIcon.png',
   },
