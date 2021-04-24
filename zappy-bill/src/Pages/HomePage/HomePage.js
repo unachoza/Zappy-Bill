@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import UserDataCard from '../../Components/UserDataCard/UserDataCard';
+import TimeInput from '../../Components/TimeInput/TimeInput';
+import TimePicker from '../../Components/TimePicker/TimePicker';
 import { FORM_DATA } from '../../Constants';
 import './HomePage.scss';
 
@@ -23,13 +25,16 @@ const HomePage = () => {
         <div className="data-card"> Please provide some information to calculate your Energy Bill</div>
         {FORM_DATA.map((card, i) => {
           return (
-            <button
-              onClick={(e) => toggleOpen(e)}
-              onTransitionEnd={(e) => toggleActive(e)}
-              className={open ? `card card${i} open` : `card card${i}`}
-            >
-              <UserDataCard key={i} card={card} />
-            </button>
+            <>
+              <button
+                onClick={(e) => toggleOpen(e)}
+                onTransitionEnd={(e) => toggleActive(e)}
+                className={open ? `card card${i} open` : `card card${i}`}
+              >
+                <UserDataCard key={i} card={card} />
+              </button>
+              <TimePicker />
+            </>
           );
         })}
       </div>
