@@ -24,6 +24,7 @@ const HomePage = () => {
         {FORM_DATA.map((card, i) => {
           return (
             <button
+              key={i}
               onClick={(e) => toggleOpen(e)}
               onTransitionEnd={(e) => toggleActive(e)}
               className={open ? `card card${i} open` : `card card${i}`}
