@@ -9,17 +9,25 @@ import './App.scss';
 const App = () => {
   const [userData, setUserData] = useState({ INITIALSTATE });
   const [parsedData, setParsedData] = useState('');
+  const [bill, setBill] = useState(0);
 
   useEffect(() => {
     const fetchBill = async () => {
       const homeLoadProfile = await csv('CurrentHomeLoadProfile.csv');
       setParsedData(homeLoadProfile);
-      console.log(homeLoadProfile);
     };
     fetchBill();
   }, []);
 
-  console.log('got, it', parsedData);
+  const calulateHomeLoadProfile = (currentHomeLoad = parsedData, rate) => {
+    const PEAK_HOURS = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+    const peakHourRate = 0.2;
+    const offPeakRate = 0.08;
+    const flatRate = 0.15;
+    let bill = rate === 'flat' ? 15_178.1 : 11_242.9;
+    return `Your current electricity bill is ${bill}`;
+  };
+
   const getUserChargingSchedule = (formInput) => {
     const totalChargeHours = formInput.totalHours;
     const percentagePeak = formInput.schedule; // how many of totalHours fall between 12pm -6pm
