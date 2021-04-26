@@ -1,0 +1,19 @@
+.input_container {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: auto;
+}
+input.milesInput {
+  height: 35px;
+  max-width: 80%;
+  min-width: 200px;
+  border-bottom: none;
+  border: solid grey 1px;
+  margin: 10px auto;
+  font-size: 20px;
+  background-color: #ffffff00;
+  &::placeholder {
+    color: #000000;
+  }
+}
