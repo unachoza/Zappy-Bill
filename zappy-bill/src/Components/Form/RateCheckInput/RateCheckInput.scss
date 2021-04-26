@@ -1,0 +1,53 @@
+$color-primary: grey;
+$secondarycolor: #1bbc9c;
+$default-font-size: 20px;
+
+.form {
+  display: flex;
+  width: 500px;
+  height: 75px;
+  margin: 10px auto;
+
+  &__radio__group {
+    width: 48%;
+    display: inline-block;
+  }
+  &__radio__input {
+    display: none;
+  }
+  &__radio__label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 80px;
+  }
+  &__radio-button {
+    height: 15px;
+    width: 15px;
+    border: 1px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 50px;
+    top: 3px;
+
+    &::after {
+      content: '';
+      display: block;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $secondarycolor;
+      border: 1px solid $color-primary;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+  &__radio__input:checked ~ &__radio__label &__radio-button:after {
+    opacity: 1;
+  }
+}
