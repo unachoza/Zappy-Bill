@@ -3,12 +3,13 @@ import { FORM_DATA } from '../../Constants';
 
 const UserDataCard = ({ card, handleInput }) => {
   const { title, icon, name } = card;
+
   return (
     <div className="card">
       <img src={icon} id="card-icon" alt="icon" />
       <div className="card-title-container">
         <div className="card-title"></div>
-        <input className="card-text" type="text" placeholder={title} name={name} onBlur={(e) => handleInput(e)} />
+        <input className="card-text " type="text" placeholder={title} name={name} onBlur={(e) => handleInput(e)} />
       </div>
     </div>
   );

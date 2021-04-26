@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import HomePage from './Pages/HomePage/HomePage';
-import { useParseCSV } from './Utility/useParseCSV';
-import { INITIALSTATE } from './Constants';
+import { INITIAL_USER_STATE } from './Constants';
 import { csv } from 'd3';
 import './App.scss';
 
 //A function name should be a verb or a phrase, fully exposing the intent behind it and the intent of the arguments.
 const App = () => {
-  const [userData, setUserData] = useState({ INITIALSTATE });
+  const [userData, setUserData] = useState({ INITIAL_USER_STATE });
   const [parsedData, setParsedData] = useState('');
   const [bill, setBill] = useState(0);
 
@@ -35,23 +34,6 @@ const App = () => {
     return totalChargeHours, percentagePeak, percentageOffPeak;
   };
 
-  // const calcElectricBill = (rate, drivingMiles, percentagePeak, percentageOffPeak) => {
-  //   const userCurrentRate = rate;
-  //   let rateEvaluation = '';
-  //   const initialHomeLoadFixed = 15_242.9;
-  //   const initialHomeLoadFlex = 11_242.9;
-  //   const evKWhConsumption = drivingMiles * 0.3;
-
-  //   const evBillImpactFix = evKWhConsumption * fixedRate;
-  //   const evBillImpactFlex = evKWhConsumption * percentageOffPeak + evKWhConsumption * percentagePeak;
-  //   if (userRate === Math.min(evBillImpactFix, evBillImpactFlex)) {
-  //     rateEvaluation = 'Current Rate is most efficient';
-  //   } else {
-  //     rateEvaluation = 'Switching rates is more cost efficient';
-  //   }
-  //   const newBill = initialHomeLoadFixed + evBillImpact;
-  //   return evBillImpact, newBill, rateEvaluation;
-  // };
   return (
     <div className="App">
       <header className="App-header">Zappy Bill</header>

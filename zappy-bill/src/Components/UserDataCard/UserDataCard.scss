@@ -1,4 +1,6 @@
 $cardBackground: #f5f5f5;
+$validGreen: #ace6ac;
+
 input {
   height: 35px;
   max-width: 80%;
@@ -17,6 +19,7 @@ button {
   border-radius: 5px;
   background-color: $cardBackground;
   margin: 10px auto;
+
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
@@ -43,8 +46,8 @@ button {
     display: flex;
     align-items: center;
     width: 400px;
-    border-radius: 5px;
-    background-color: $cardBackground;
+    // border-radius: 5px;
+    // background-color: $cardBackground;
     margin: 10px auto;
     #card-icon {
       width: 20%;
@@ -81,6 +84,9 @@ button {
 .card.open {
   font-size: 40px;
 }
-
+.valid {
+  border: solid $validGreen;
+  background-color: $validGreen;
+}
 // animations
 // grow
