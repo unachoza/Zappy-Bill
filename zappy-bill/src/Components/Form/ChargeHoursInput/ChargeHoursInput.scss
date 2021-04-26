@@ -1,0 +1,19 @@
+.ChargeHoursInput-container {
+  display: flex;
+  justify-content: space-between;
+  width: 375px;
+  padding: 15px;
+  margin: auto;
+}
+
+.ChargeHoursInput-dash {
+  color: grey;
+  font-size: 10px;
+  font-weight: 900;
+  margin-top: 12px;
+}
+#remove {
+  border: none;
+  box-shadow: none;
+  background: none;
+}
