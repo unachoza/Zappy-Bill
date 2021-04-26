@@ -1,0 +1,37 @@
+// BEM - Block Element Modifier
+.DropDownContainer {
+  width: 10.5em;
+  margin: 0 auto;
+
+  .DropDownHeader {
+    margin-bottom: 20px;
+    padding: 0.4em 2em 0.4em 1em;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #3faffa;
+    background: #ffffff;
+  }
+}
+
+.DropDownListContainer {
+}
+ul.DropDownList {
+  background: #ffffff;
+  border: 2px solid #e5e5e5;
+  box-sizing: border-box;
+  color: #3faffa;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 10px 10px;
+  max-height: 470px;
+  overflow: scroll;
+  &:first-child {
+    padding-top: 20px;
+  }
+  li.ListItem {
+    list-style: none;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e5e5;
+  }
+}

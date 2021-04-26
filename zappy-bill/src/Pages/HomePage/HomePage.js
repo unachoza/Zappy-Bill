@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserDataCard from '../../Components/UserDataCard/UserDataCard';
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner';
+import TimeDropDown from '../../Components/TimeDropDown/TimeDropDown';
 import { FORM_DATA, INITIAL_USER_STATE, FIXED_RATE, TOU_RATE } from '../../Constants';
 import './HomePage.scss';
 
@@ -17,18 +18,13 @@ const HomePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    // setLoading(true);
     const { currentRate, milesDriven, chargingHours } = userData;
     calcElectricBill(currentRate, milesDriven, chargingHours);
-
-    // setPage(resultsPage);
     //3 inputs need to be validated
-    //loading spinner
     //run calculate function to
     //change page
   };
   const calcElectricBill = (rate, drivingMiles, percentagePeak = 0, percentageOffPeak = 0) => {
-    console.log(rate, drivingMiles, percentagePeak, percentageOffPeak);
     const userCurrentRate = rate;
     let rateEvaluation = '';
     const initialHomeLoadFixed = 15_242.9;
@@ -36,22 +32,22 @@ const HomePage = () => {
     const evKWhConsumption = drivingMiles * 0.3;
     const evBillImpactFix = evKWhConsumption * FIXED_RATE;
     const evBillImpactFlex = evKWhConsumption * percentageOffPeak + evKWhConsumption * percentagePeak;
-
-    if (rate === Math.min(evBillImpactFix, evBillImpactFlex)) {
-      rateEvaluation = 'Current Rate is most efficient';
-    } else {
-      rateEvaluation = 'Switching rates is more cost efficient';
-    }
     const newBill = initialHomeLoadFixed + evBillImpactFix;
     console.log('the calclations', evBillImpactFix, rate);
     return evBillImpactFix, newBill, rateEvaluation;
   };
+  // const evaluateUserRate = (userRate, evBillImpactFix, evBillImpactFlex) => {
+  //   if (userRate === Math.min(evBillImpactFix, evBillImpactFlex)) {
+  //     rateEvaluation = 'Current Rate is most efficient';
+  //   } else {
+  //     rateEvaluation = 'Switching rates is more cost efficient';
+  //   }
+  // };
 
-  console.log('on home page, where is state', userData);
   return (
     <>
       <h1 className="header">Hello, Jenny User!</h1>
-      {loading === false ? (
+      {/* {loading === false ? (
         <>
           <form onSubmit={handleSubmit}>
             <div className="user-data cards">
@@ -74,7 +70,8 @@ const HomePage = () => {
         </>
       ) : (
         <LoadingSpinner />
-      )}
+      )} */}
+      <TimeDropDown />
     </>
   );
 };
