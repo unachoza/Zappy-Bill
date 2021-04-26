@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UserDataCard from '../../Components/UserDataCard/UserDataCard';
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner';
 import TimeDropDown from '../../Components/TimeDropDown/TimeDropDown';
+import ChargeHoursInput from '../../Components/ChargeHoursInput/ChargeHoursInput';
 import { FORM_DATA, INITIAL_USER_STATE, FIXED_RATE, TOU_RATE } from '../../Constants';
 import './HomePage.scss';
 
@@ -14,6 +15,10 @@ const HomePage = () => {
     e.preventDefault();
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+  };
+  const addNewTimeRange = () => {
+    console.log('yesclick');
+    return <ChargeHoursInput />;
   };
 
   const handleSubmit = (e) => {
@@ -71,7 +76,7 @@ const HomePage = () => {
       ) : (
         <LoadingSpinner />
       )} */}
-      <TimeDropDown />
+      <ChargeHoursInput addNewRange={addNewTimeRange()} />
     </>
   );
 };

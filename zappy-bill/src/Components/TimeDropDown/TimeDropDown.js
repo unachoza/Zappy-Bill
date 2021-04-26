@@ -3,14 +3,16 @@ import './TimeDropDown.scss';
 
 const TimeDropDown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('Start');
 
   const toggling = () => setIsOpen(!isOpen);
-  const onOptionClicked = (value) => () => {
+
+  const onOptionClicked = (value) => {
     setSelectedOption(value);
     setIsOpen(false);
-    console.log(selectedOption);
   };
+
+  //get start and end time from two similar components set to userData
 
   const convertMiltaryTime = (hour) => {
     return hour > 12 && hour < 24 //13-23
@@ -29,20 +31,18 @@ const TimeDropDown = () => {
   };
 
   const hourOptions = range(1, 24);
-
   return (
     <>
-      <h1>Select Time</h1>
       <div className="DropDownContainer">
         <div className="DropDownHeader" onClick={toggling}>
-          12:00AM
+          {selectedOption}
         </div>
 
         {isOpen && (
           <div className="DropDownListContainer">
             <ul className="DropDownList">
               {hourOptions.map((hour, i) => (
-                <li key={i} className="ListItem">
+                <li key={i} className="ListItem" onClick={(e) => onOptionClicked(e.target.outerText)}>
                   {hour}
                 </li>
               ))}
