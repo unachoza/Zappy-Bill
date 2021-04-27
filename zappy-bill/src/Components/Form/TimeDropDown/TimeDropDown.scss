@@ -10,7 +10,7 @@ $secondarycolor: #1bbc9c;
     border: solid grey 1px;
     border-radius: 5px;
     font-weight: 500;
-    font-size: 1.3rem;
+    font-size: 20px;
     color: #131923;
     background: #ffffff;
     &:active {
@@ -42,14 +42,14 @@ ul.DropDownList {
   &:first-child {
     padding-top: 20px;
   }
-  li.ListItem {
-    list-style: none;
-    margin-bottom: 18px;
-    border-bottom: 2px solid #e5e5e5;
-    &:hover {
-      background-color: $secondarycolor;
-      color: white;
-      cursor: pointer;
-    }
+}
+.ListItem {
+  list-style: none;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #e5e5e5;
+  &:hover {
+    background-color: $secondarycolor;
+    color: white;
+    cursor: pointer;
   }
 }

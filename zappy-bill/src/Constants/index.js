@@ -1,14 +1,20 @@
 export const INITIAL_USER_STATE = {
   currentRate: 'flat',
   milesDriven: 0,
-  chargingHours: [],
 };
+export const chargingTimes = { startTime: 0, endTime: 0 };
+
 export const INITIAL_FORM_STATE = {
   rateErrorMessage: '',
   milesDrivenErrorMessage: '',
 };
 
-export const FIXED_RATE = 0.15;
+export const INITIAL_HOME_LOAD = {
+  FLAT: 15_242.9,
+  TOU: 11_242.9,
+};
+
+export const FLAT_RATE = 0.15;
 export const TOU_RATE = { peak: 0.2, offPeak: 0.08 };
 export const FORM_DATA = [
   {
@@ -33,3 +39,5 @@ export const FORM_DATA = [
 ];
 
 export const PEAK_HOURS = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+
+export const PEAK_HOURS_VALUES = [12, 13, 14, 15, 16, 17];
