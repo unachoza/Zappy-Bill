@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import InfoModal from '../../InfoModal/InfoModal';
 import './RateCheckInput.scss';
 
 const RateCheckInput = ({ handleChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggling = () => setIsOpen(!isOpen);
+
   return (
     <>
       <label>What is your current Electricity Bill Rate?</label>
@@ -19,8 +23,18 @@ const RateCheckInput = ({ handleChange }) => {
             <span className="form__radio-button"></span>
             Flex Rate
           </label>
+          <span>
+            {' '}
+            <img
+              src={`https://res.cloudinary.com/dh41vh9dx/image/upload/v1619578173/3946401821543238897.svg`}
+              className="info-icon"
+              alt="information icon"
+              onClick={toggling}
+            />
+          </span>
         </div>
       </div>
+      {isOpen && <InfoModal toggling={toggling} />}
     </>
   );
 };
