@@ -1,0 +1,28 @@
+.resultsPage {
+  position: absolute;
+  height: 100vh;
+  width: 80vw;
+  position: absolute;
+  margin: auto;
+  background: url(https://res.cloudinary.com/dh41vh9dx/image/upload/v1619192056/car.png) no-repeat center center fixed;
+  background-size: 70%;
+  background-position: left bottom;
+}
+.results-content {
+  color: white;
+  width: 70%;
+  max-width: 400px;
+  height: 350px;
+  position: absolute;
+  bottom: 300px;
+  right: 100px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #131923, #385586);
+}
+.billInfo {
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 50px;
+  margin-top: 40px;
+}

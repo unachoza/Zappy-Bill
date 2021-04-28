@@ -3,7 +3,7 @@ import './TimeDropDown.scss';
 
 const TimeDropDown = ({ setChargingHours, chargingHours, name }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Start');
+  const [selectedOption, setSelectedOption] = useState('00:00');
 
   const toggling = () => setIsOpen(!isOpen);
   const onOptionClicked = ({ id, innerHTML, value }) => {

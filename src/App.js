@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import HomePage from './Pages/Home/HomePage';
 import ResultsPage from './Pages/Results/ResultsPage';
+import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner';
 import { EV_KWH_RATE, FLAT_RATE, TOU_RATE, PEAK_HOURS_VALUES } from './Constants';
 import './App.scss';
 
 const App = () => {
   const [bill, setBill] = useState(0);
   const [suggestion, setSuggestion] = useState('');
+  const [loading, setLoading] = useState(false);
 
   //works
   const createHoursRange = (size, startAt) => {
@@ -57,14 +59,14 @@ const App = () => {
   const calculateOptimalRate = (currentRate, flatBill, flexBill) => {
     const optimalprice = Math.min(flatBill, flexBill);
     if (currentRate === 'flex') {
-      setSuggestion(optimalprice === flexBill ? 'Keep Your Rate' : 'Switch');
+      setSuggestion(optimalprice === flexBill ? 'Keep Your Rate' : 'Switch Rates');
     } else if (currentRate === 'flat') {
-      setSuggestion(optimalprice === flatBill ? 'Keep Your Rate' : 'Switch');
+      setSuggestion(optimalprice === flatBill ? 'Keep Your Rate' : 'Switch Rates');
     }
   };
+
   return (
     <div className="App">
-      <header className="App-header">Zappy Bill</header>
       <HomePage calcElectricBill={calcElectricBill} />
       <ResultsPage bill={bill} suggestion={suggestion} />
     </div>

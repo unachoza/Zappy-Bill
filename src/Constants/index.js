@@ -1,8 +1,7 @@
 export const INITIAL_USER_STATE = {
-  currentRate: 'flat',
+  currentRate: null,
   milesDriven: 0,
 };
-export const chargingTimes = { startTime: 0, endTime: 0 };
 
 export const INITIAL_FORM_STATE = {
   rateErrorMessage: '',
