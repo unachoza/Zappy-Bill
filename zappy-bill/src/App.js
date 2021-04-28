@@ -1,43 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import HomePage from './Pages/HomePage/HomePage';
-import { INITIAL_USER_STATE } from './Constants';
-import { csv } from 'd3';
+import React, { useState } from 'react';
+import HomePage from './Pages/Home/HomePage';
+import ResultsPage from './Pages/Results/ResultsPage';
+import { EV_KWH_RATE, FLAT_RATE, TOU_RATE, PEAK_HOURS_VALUES } from './Constants';
 import './App.scss';
 
-//A function name should be a verb or a phrase, fully exposing the intent behind it and the intent of the arguments.
 const App = () => {
-  const [userData, setUserData] = useState({ INITIAL_USER_STATE });
-  const [parsedData, setParsedData] = useState('');
   const [bill, setBill] = useState(0);
+  const [suggestion, setSuggestion] = useState('');
 
-  useEffect(() => {
-    const fetchBill = async () => {
-      const homeLoadProfile = await csv('CurrentHomeLoadProfile.csv');
-      setParsedData(homeLoadProfile);
-    };
-    fetchBill();
-  }, []);
-
-  const calulateHomeLoadProfile = (currentHomeLoad = parsedData, rate) => {
-    const PEAK_HOURS = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
-    const peakHourRate = 0.2;
-    const offPeakRate = 0.08;
-    const flatRate = 0.15;
-    let bill = rate === 'flat' ? 15_178.1 : 11_242.9;
-    return `Your current electricity bill is ${bill}`;
+  //works
+  const createHoursRange = (size, startAt) => {
+    return [...Array(size).keys()].map((i) => i + startAt);
+  };
+  //works
+  const checkPeakHours = (arr1, arr2) => {
+    return arr1.filter((elm) => arr2.includes(elm));
+  };
+  //Works
+  const calcChargeHours = (start, end) => {
+    return end < start ? 24 - start + end : Math.abs(end - start);
+  };
+  //Works
+  const calcTOUHours = ({ startTime, endTime }) => {
+    const totalHours = calcChargeHours(startTime, endTime);
+    const chargingRange = createHoursRange(totalHours, startTime);
+    const totalPeakHours = checkPeakHours(PEAK_HOURS_VALUES, chargingRange).length;
+    const peakPercentage = totalPeakHours / totalHours;
+    const offPeakPercentage = (totalHours - totalPeakHours) / totalHours;
+    return { peakPercentage, offPeakPercentage };
   };
 
-  const getUserChargingSchedule = (formInput) => {
-    const totalChargeHours = formInput.totalHours;
-    const percentagePeak = formInput.schedule; // how many of totalHours fall between 12pm -6pm
-    const percentageOffPeak = formInput.schedule; // how many of totalHours fall between 7pm -11am
-    return totalChargeHours, percentagePeak, percentageOffPeak;
+  //works
+  const calcFlexBill = (energyConsumption, peakHours, offpeakHours, offpeakRate, peakRate) => {
+    let offpeakCost = energyConsumption * offpeakHours * offpeakRate;
+    let peakCost = energyConsumption * peakHours * peakRate;
+    return offpeakCost + peakCost;
   };
 
+  // works
+  const calcElectricBill = (currentRate, milesDriven, chargingHours) => {
+    const evKWhConsumption = milesDriven * EV_KWH_RATE;
+    const flatBill = evKWhConsumption * FLAT_RATE;
+    const usersTOUHours = calcTOUHours(chargingHours);
+    const flexBill = calcFlexBill(
+      evKWhConsumption,
+      usersTOUHours.peakPercentage,
+      usersTOUHours.offPeakPercentage,
+      TOU_RATE.offPeak,
+      TOU_RATE.peak
+    );
+    calculateOptimalRate(currentRate, flatBill, flexBill);
+    setBill(currentRate === 'flat' ? flatBill : flexBill);
+  };
+
+  //works
+  const calculateOptimalRate = (currentRate, flatBill, flexBill) => {
+    const optimalprice = Math.min(flatBill, flexBill);
+    if (currentRate === 'flex') {
+      setSuggestion(optimalprice === flexBill ? 'Keep Your Rate' : 'Switch');
+    } else if (currentRate === 'flat') {
+      setSuggestion(optimalprice === flatBill ? 'Keep Your Rate' : 'Switch');
+    }
+  };
   return (
     <div className="App">
       <header className="App-header">Zappy Bill</header>
-      <HomePage />
+      <HomePage calcElectricBill={calcElectricBill} />
+      <ResultsPage bill={bill} suggestion={suggestion} />
     </div>
   );
 };

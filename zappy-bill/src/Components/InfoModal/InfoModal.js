@@ -5,7 +5,7 @@ import './InfoModal.scss';
 const InfoModal = ({ toggling }) => {
   return (
     <div className="info-modal-container">
-      <div className="modal-container show-modal" id="modal">
+      <div className="modal-container show-modal" id="modal ">
         <div className="modal">
           <img
             src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1619580778/icons8-macos-close-32.png"
