@@ -5,7 +5,6 @@ import trashIcon from '../../../zappyAssests/trashIcon.svg';
 import plusIcon from '../../../zappyAssests/plusIcon.svg';
 
 const ChargeHoursInput = ({ chargingHours, setChargingHours }) => {
-  console.log(chargingHours);
   return (
     <>
       <label>When do you plan to charge your vehicle?</label>
