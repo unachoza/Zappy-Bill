@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import RateCheckInput from '../../Components/Form/RateCheckInput/RateCheckInput';
 import DrivingMilesInput from '../../Components/Form/DrivingMilesInput/DrivingMilesInput';
 import ChargeHoursInput from '../../Components/Form/ChargeHoursInput/ChargeHoursInput';
-import InfoModal from '../../Components/InfoModal/InfoModal';
 import { INITIAL_USER_STATE, EV_KWH_RATE, FLAT_RATE, TOU_RATE, PEAK_HOURS_VALUES } from '../../Constants';
 import { useForm } from '../../Utility/useForm';
 import './HomePage.scss';
@@ -11,6 +10,8 @@ import './HomePage.scss';
 const HomePage = () => {
   const [userData, handleChange] = useForm(INITIAL_USER_STATE);
   const [chargingHours, setChargingHours] = useState({ startTime: 0, endTime: 0 });
+  const [bill, setBill] = useState(0);
+  const [suggestion, setSuggestion] = useState('');
 
   //works
   const createHoursRange = (size, startAt) => {
@@ -31,69 +32,49 @@ const HomePage = () => {
     const totalPeakHours = checkPeakHours(PEAK_HOURS_VALUES, chargingRange).length;
     const peakChargePercentage = totalPeakHours / totalHours;
     const offPeakChargePercentage = (totalHours - totalPeakHours) / totalHours;
-    console.log('time of use', typeof peakChargePercentage, typeof offPeakChargePercentage);
     return { peakChargePercentage, offPeakChargePercentage };
   };
 
-  //works // HOWEVER when called inside of calcElectricBill, adding offpeak & peakCost returns NAN
+  //works
   const calcFlexBill = (energyConsumption, peakHours, offpeakHours, offpeakRate, peakRate) => {
-    console.log(energyConsumption, peakHours, offpeakHours, offpeakRate, peakRate);
     let offpeakCost = energyConsumption * offpeakHours * offpeakRate;
     let peakCost = energyConsumption * peakHours * peakRate;
-
-    console.log(offpeakCost, peakCost);
     return offpeakCost + peakCost;
   };
 
-  //does not work
+  // works
   const calcElectricBill = (currentRate, milesDriven, chargingHours) => {
     const evKWhConsumption = milesDriven * EV_KWH_RATE;
-    const evFlatBill = evKWhConsumption * FLAT_RATE;
+    const flatBill = evKWhConsumption * FLAT_RATE;
     const usersTOUHours = calcTOUHours(chargingHours);
-    const evBillImpactFlex = calcFlexBill(
+    const flexBill = calcFlexBill(
       evKWhConsumption,
       usersTOUHours.peakChargePercentage,
       usersTOUHours.offPeakChargePercentage,
       TOU_RATE.offPeak,
       TOU_RATE.peak
     );
-
-    console.log({ evBillImpactFlex });
-    // const rateEvaluation = calculateOptimalRate(currentRate, evBillImpactFlat, evBillImpactFlex);
-    // console.log(rateEvaluation);
-    // return rateEvaluation;
+    calculateOptimalRate(currentRate, flatBill, flexBill);
+    setBill(currentRate === 'flat' ? flatBill : flexBill);
   };
 
-  // evKWhConsumption * usersTOUHours.offPeakChargePercentage * TOU_RATE.peak +
-  //     evKWhConsumption * usersTOUHours.peakChargePercentage * TOU_RATE.offPeak;
-
-  //does not work
-  // const calculateOptimalRate = (currentRate, evFlatBill, evBillImpactFlex) => {
-  //   let optimalprice = Math.min(evFlatBill, evBillImpactFlex);
-  //   if (currentRate === 'flat' && optimalprice == evFlatBill) {
-  //     rateEvaluation.userSuggestion = 'Keep Your Rate';
-  //   } else if (currentRate === 'flex' && optimalprice == evBillImpactFlex) {
-  //     rateEvaluation.userSuggestion = `switch`;
-  //   }
-  // };
-
+  //works
+  const calculateOptimalRate = (currentRate, flatBill, flexBill) => {
+    const optimalprice = Math.min(flatBill, flexBill);
+    if (currentRate === 'flex') {
+      setSuggestion(optimalprice === flexBill ? 'Keep Your Rate' : 'Switch');
+    } else if (currentRate === 'flat') {
+      setSuggestion(optimalprice === flatBill ? 'Keep Your Rate' : 'Switch');
+    }
+  };
   const handleSubmit = () => {
-    console.log('submited');
     const { currentRate, milesDriven } = userData;
     calcElectricBill(currentRate, milesDriven, chargingHours);
   };
-  // const showModal () {
-  //   modal.classList.add('show-modal');
-  //   websiteNameEl.focus();
-  // }
 
-  // modalShow.addEventListener('click', showModal);
-  // modalClose.addEventListener('click', () => modal.classList.remove('show-modal'));
-  // window.addEventListener('click', (e) => (e.target === modal ? modal.classList.remove('show-modal') : false));
   return (
     <>
       <h1 className="header">Hello, Jenny User!</h1>
-
       <RateCheckInput handleChange={handleChange} />
       <DrivingMilesInput handleChange={handleChange} />
       <ChargeHoursInput chargingHours={chargingHours} setChargingHours={setChargingHours} />
