@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
 import HomePage from './Pages/Home/HomePage';
 import ResultsPage from './Pages/Results/ResultsPage';
-import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner';
 import { EV_KWH_RATE, FLAT_RATE, TOU_RATE, PEAK_HOURS_VALUES } from './Constants';
 import './App.scss';
 
 const App = () => {
   const [bill, setBill] = useState(0);
   const [suggestion, setSuggestion] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  //works
   const createHoursRange = (size, startAt) => {
     return [...Array(size).keys()].map((i) => i + startAt);
   };
-  //works
   const checkPeakHours = (arr1, arr2) => {
     return arr1.filter((elm) => arr2.includes(elm));
   };
-  //Works
   const calcChargeHours = (start, end) => {
     return end < start ? 24 - start + end : Math.abs(end - start);
   };
-  //Works
   const calcTOUHours = ({ startTime, endTime }) => {
     const totalHours = calcChargeHours(startTime, endTime);
     const chargingRange = createHoursRange(totalHours, startTime);
@@ -32,14 +26,12 @@ const App = () => {
     return { peakPercentage, offPeakPercentage };
   };
 
-  //works
   const calcFlexBill = (energyConsumption, peakHours, offpeakHours, offpeakRate, peakRate) => {
     let offpeakCost = energyConsumption * offpeakHours * offpeakRate;
     let peakCost = energyConsumption * peakHours * peakRate;
     return offpeakCost + peakCost;
   };
 
-  // works
   const calcElectricBill = (currentRate, milesDriven, chargingHours) => {
     const evKWhConsumption = milesDriven * EV_KWH_RATE;
     const flatBill = evKWhConsumption * FLAT_RATE;
@@ -64,7 +56,6 @@ const App = () => {
       setSuggestion(optimalprice === flatBill ? 'Keep Your Rate' : 'Switch Rates');
     }
   };
-
   return (
     <div className="App">
       <HomePage calcElectricBill={calcElectricBill} />

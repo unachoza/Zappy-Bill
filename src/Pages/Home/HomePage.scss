@@ -1,6 +1,9 @@
 $maincolor: #f8943a;
 $borderColor: #ccc;
 $darkblue: #131923;
+.header {
+  font-size: 25px;
+}
 .page {
   height: 100vh;
   display: flex;
@@ -55,5 +58,11 @@ button {
     transform: scaleX(1.4) scaleY(1.6);
     opacity: 0;
     transition: all 3s;
+  }
+}
+
+//Does not contain media queries // is not response YET
+@media screen and (max-width: 750px) {
+  .form-container {
   }
 }

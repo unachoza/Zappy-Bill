@@ -9,7 +9,9 @@
   background-position: left bottom;
 }
 .results-content {
-  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px;
   width: 70%;
   max-width: 400px;
   height: 350px;
@@ -18,11 +20,8 @@
   right: 100px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  background: linear-gradient(to bottom, #131923, #385586);
 }
 .billInfo {
-  font-weight: bold;
   font-size: 25px;
   line-height: 50px;
-  margin-top: 40px;
 }
