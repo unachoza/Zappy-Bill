@@ -32,7 +32,14 @@ const HomePage = ({ calcElectricBill, executeScroll }) => {
         <RateCheckInput handleChange={handleChange} />
         <DrivingMilesInput handleChange={handleChange} />
         <ChargeHoursInput chargingHours={chargingHours} setChargingHours={setChargingHours} />
-        <button onClick={executeScroll}>Submit</button>
+        <button
+          onClick={() => {
+            handleSubmit();
+            executeScroll();
+          }}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );

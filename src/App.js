@@ -61,20 +61,13 @@ const App = () => {
   };
 
   const executeScroll = () => {
-    console.log('scrolling');
-    resultsPageRef.current.scrollIntoView(resultsPageRef);
+    resultsPageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
-
-  // // General scroll to element function
 
   return (
     <div className="App">
       <HomePage calcElectricBill={calcElectricBill} executeScroll={executeScroll} />
-      <button style={{ color: 'blue' }} onClick={executeScroll}>
-        <ResultsPage ref={resultsPageRef} bill={bill} suggestion={suggestion} />
-        Calculate
-      </button>
-      <div>Scroll down for results</div>
+      <ResultsPage ref={resultsPageRef} bill={bill} suggestion={suggestion} />
     </div>
   );
 };
