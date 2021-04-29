@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, fuseorwardRef } from 'react';
 import HomePage from './Pages/Home/HomePage';
 import ResultsPage from './Pages/Results/ResultsPage';
 import { EV_KWH_RATE, FLAT_RATE, TOU_RATE, PEAK_HOURS_VALUES } from './Constants';
 import './App.scss';
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const App = () => {
   const [bill, setBill] = useState(0);
   const [suggestion, setSuggestion] = useState('');
+  const resultsPageRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const createHoursRange = (size, startAt) => {
     return [...Array(size).keys()].map((i) => i + startAt);
@@ -56,10 +59,22 @@ const App = () => {
       setSuggestion(optimalprice === flatBill ? 'Keep Your Rate' : 'Switch Rates');
     }
   };
+
+  const executeScroll = () => {
+    console.log('scrolling');
+    resultsPageRef.current.scrollIntoView(resultsPageRef);
+  };
+
+  // // General scroll to element function
+
   return (
     <div className="App">
-      <HomePage calcElectricBill={calcElectricBill} />
-      <ResultsPage bill={bill} suggestion={suggestion} />
+      <HomePage calcElectricBill={calcElectricBill} executeScroll={executeScroll} />
+      <button style={{ color: 'blue' }} onClick={executeScroll}>
+        <ResultsPage ref={resultsPageRef} bill={bill} suggestion={suggestion} />
+        Calculate
+      </button>
+      <div>Scroll down for results</div>
     </div>
   );
 };

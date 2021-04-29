@@ -7,10 +7,9 @@ import { useForm } from '../../Utility/useForm';
 import './HomePage.scss';
 
 //A function name should be a verb or a phrase, fully exposing the intent behind it and the intent of the arguments//
-const HomePage = ({ calcElectricBill, setCurrentPage }) => {
+const HomePage = ({ calcElectricBill, executeScroll }) => {
   const [userData, handleChange] = useForm(INITIAL_USER_STATE);
   const [chargingHours, setChargingHours] = useState({ startTime: 0, endTime: 0 });
-  const [displayNotice, setDisplayNotice] = useState(false);
 
   //not being used YET
   const validateForm = (currentRate, milesDriven, chargingHours) => {
@@ -24,7 +23,6 @@ const HomePage = ({ calcElectricBill, setCurrentPage }) => {
   const handleSubmit = (e) => {
     const { currentRate, milesDriven } = userData;
     calcElectricBill(currentRate, milesDriven, chargingHours);
-    setDisplayNotice(true);
   };
 
   return (
@@ -34,8 +32,7 @@ const HomePage = ({ calcElectricBill, setCurrentPage }) => {
         <RateCheckInput handleChange={handleChange} />
         <DrivingMilesInput handleChange={handleChange} />
         <ChargeHoursInput chargingHours={chargingHours} setChargingHours={setChargingHours} />
-        <button onClick={handleSubmit}>Calculate</button>
-        {displayNotice && <div>Scroll down for results</div>}
+        <button onClick={executeScroll}>Submit</button>
       </div>
     </div>
   );
