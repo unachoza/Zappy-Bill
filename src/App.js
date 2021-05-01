@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect, fuseorwardRef } from 'react';
+import React, { useState, useRef } from 'react';
 import HomePage from './Pages/Home/HomePage';
 import ResultsPage from './Pages/Results/ResultsPage';
+import BarChart from './Components/BarChart/BarChart';
 import { EV_KWH_RATE, FLAT_RATE, TOU_RATE, PEAK_HOURS_VALUES } from './Constants';
 import './App.scss';
 
@@ -9,7 +10,7 @@ const App = () => {
   const [bill, setBill] = useState(0);
   const [suggestion, setSuggestion] = useState('');
   const resultsPageRef = useRef(null);
-  const buttonRef = useRef(null);
+  const homePageRef = useRef(null);
 
   const createHoursRange = (size, startAt) => {
     return [...Array(size).keys()].map((i) => i + startAt);
@@ -60,14 +61,17 @@ const App = () => {
     }
   };
 
-  const executeScroll = () => {
+  const executeResultScroll = () => {
     resultsPageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const executeHomeScroll = () => {
+    homePageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
     <div className="App">
-      <HomePage calcElectricBill={calcElectricBill} executeScroll={executeScroll} />
-      <ResultsPage ref={resultsPageRef} bill={bill} suggestion={suggestion} />
+      <HomePage ref={homePageRef} calcElectricBill={calcElectricBill} executeScroll={executeResultScroll} />
+      <ResultsPage ref={resultsPageRef} bill={bill} suggestion={suggestion} executeScroll={executeHomeScroll} />
     </div>
   );
 };

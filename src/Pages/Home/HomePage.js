@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import RateCheckInput from '../../Components/Form/RateCheckInput/RateCheckInput';
 import DrivingMilesInput from '../../Components/Form/DrivingMilesInput/DrivingMilesInput';
 import ChargeHoursInput from '../../Components/Form/ChargeHoursInput/ChargeHoursInput';
@@ -7,7 +7,7 @@ import { useForm } from '../../Utility/useForm';
 import './HomePage.scss';
 
 //A function name should be a verb or a phrase, fully exposing the intent behind it and the intent of the arguments//
-const HomePage = ({ calcElectricBill, executeScroll }) => {
+const HomePage = ({ calcElectricBill, executeScroll }, ref) => {
   const [userData, handleChange] = useForm(INITIAL_USER_STATE);
   const [chargingHours, setChargingHours] = useState({ startTime: 0, endTime: 0 });
 
@@ -26,7 +26,7 @@ const HomePage = ({ calcElectricBill, executeScroll }) => {
   };
 
   return (
-    <div className="page">
+    <div ref={ref} className="page">
       <div className="form-container">
         <h1 className="header">Calculate Electric Vehicle Energy Cost!</h1>
         <RateCheckInput handleChange={handleChange} />
@@ -44,5 +44,5 @@ const HomePage = ({ calcElectricBill, executeScroll }) => {
     </div>
   );
 };
-
-export default HomePage;
+const forwardedHomePageRef = forwardRef(HomePage);
+export default forwardedHomePageRef;
