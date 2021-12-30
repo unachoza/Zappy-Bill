@@ -10,17 +10,10 @@ $darkblue: #131923;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #373b44; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #131923, #385586); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #131923,
-    #385586
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .form-container {
   height: fit-content;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 15px rgb(0 0 0 / 20%);
   border-radius: 10px;
   border: #ccc solid 1px;
   background-color: white;
