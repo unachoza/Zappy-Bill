@@ -11,14 +11,14 @@ const HomePage = ({ calcElectricBill, executeScroll }, ref) => {
   const [userData, handleChange] = useForm(INITIAL_USER_STATE);
   const [chargingHours, setChargingHours] = useState({ startTime: 0, endTime: 0 });
 
-  //not being used YET
-  const validateForm = (currentRate, milesDriven, chargingHours) => {
-    const { startTime, endTime } = chargingHours;
-    if (!currentRate || !milesDriven || !startTime || !endTime) {
-      return false;
-    }
-    return true;
-  };
+  //**************not being used YET ****************
+  // const validateForm = (currentRate, milesDriven, chargingHours) => {
+  //   const { startTime, endTime } = chargingHours;
+  //   if (!currentRate || !milesDriven || !startTime || !endTime) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   const handleSubmit = (e) => {
     const { currentRate, milesDriven } = userData;
