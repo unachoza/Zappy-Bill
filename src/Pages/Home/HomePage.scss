@@ -1,8 +1,11 @@
 $maincolor: #f8943a;
 $borderColor: #ccc;
 $darkblue: #131923;
+$secondarycolor: #1bbc9c;
 .header {
-  font-size: 25px;
+  font-size: 30px;
+  font-weight: normal;
+  font-family: roboto;
 }
 .page {
   height: 100vh;
@@ -10,20 +13,14 @@ $darkblue: #131923;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #373b44; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #131923, #385586); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #131923,
-    #385586
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: $secondarycolor;
 }
 .form-container {
   height: fit-content;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 15px rgb(0 0 0 / 20%);
   border-radius: 10px;
-  border: #ccc solid 1px;
   background-color: white;
+  padding: 20px
 }
 
 button {
@@ -36,6 +33,7 @@ button {
   color: white;
   border-radius: 25px;
   background-color: $maincolor;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-3px);
@@ -60,7 +58,19 @@ button {
     transition: all 3s;
   }
 }
+.zappyLogo {
+  color: white;
+  font-size: 16px;
+  font-family: Montserrat;
+  height: 50px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
 
+img {
+  margin: -5px 5px;
+}
 //Does not contain media queries // is not response YET
 @media screen and (max-width: 750px) {
   .form-container {

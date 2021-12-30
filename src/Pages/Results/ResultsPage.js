@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import './ResultsPage.scss';
 
 const ResultsPage = ({ bill, suggestion, executeScroll }, ref) => {
