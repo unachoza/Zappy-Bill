@@ -5,7 +5,7 @@ import './ChargeHoursInput.scss';
 const ChargeHoursInput = ({ chargingHours, setChargingHours }) => {
   return (
     <>
-      <label>When do u plan to charge your vehicle?</label>
+      <label>When do u plan to charge your vehicle??</label>
       <div className="ChargeHoursInput-container">
         <TimeDropDown name="startTime" chargingHours={chargingHours} setChargingHours={setChargingHours} />
         <span className="ChargeHoursInput-dash">—</span>
