@@ -1,5 +1,5 @@
 # Zappy Bill 
-view live https://zappy-bill.herokuapp.com/
+view live https://zappy-bill-i18h-ocpghsbbv-unachoza.vercel.app/
 
 ## Calculating impact of electric vehicle on electricity bill.
 
